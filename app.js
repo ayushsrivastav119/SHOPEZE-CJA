@@ -249,12 +249,10 @@ function firePurchase(order) {
       products: order.items.map(item => {
         // Find full product details from PRODUCTS array
         const fullProduct = PRODUCTS.find(p => p.id === item.id);
-        
         // Calculate proportional discount for this item
         const itemSubtotal = item.price * item.qty;
         const orderSubtotal = order.originalTotal || order.total + (order.discount || 0);
         const discountAmount = orderSubtotal > 0 ? (order.discount || 0) * (itemSubtotal / orderSubtotal) : 0;
-        
         return {
           productID: item.id,
           productName: item.title,
@@ -268,6 +266,12 @@ function firePurchase(order) {
           couponCode: order.couponCode || ""                 // ✅ Coupon code
         };
       })
+    },
+    custData: {
+      email: "ayu@gmail.com",
+      language: "en",
+      loginStatus: "guest",
+      platform: "desktop web"
     }
   };
 
