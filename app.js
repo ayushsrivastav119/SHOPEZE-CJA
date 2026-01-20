@@ -268,7 +268,7 @@ function firePurchase(order) {
       })
     },
     custData: {
-      email: "ayu@gmail.com",
+      email: order.email || "",
       language: "en",
       loginStatus: "guest",
       platform: "desktop web"
