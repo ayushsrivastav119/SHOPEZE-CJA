@@ -28,7 +28,7 @@ function firePageLoaded() {
 
   const pageMap = {
     home: { pageName: "home", pageType: "home", channel: "web/home" },
-    plp: { pageName: "products", pageType: "category", channel: "web/category" },
+    plp: { pageName: "products Listing Page", pageType: "plp", channel: "web/category" },
     pdp: { pageName: "product-detail", pageType: "pdp", channel: "web/product" },
     cart: { pageName: "cart", pageType: "cart", channel: "web/cart" },
     checkout: { pageName: "checkout", pageType: "checkout", channel: "web/checkout" },
@@ -59,7 +59,12 @@ function firePageLoaded() {
           productImageUrl: prod.img,             // ✅ Product Image URL
           currencyCode: "INR",                   // ✅ Currency Code
           productAddMethod: "directView",        // ✅ Add Method (directView on PDP)
-          couponCode: ""                         // ✅ Coupon Code (empty on view)
+          couponCode: "",                        // ✅ Coupon Code (empty on view)
+          color: prod.color || "",
+          warranty: prod.warranty || "",
+          category: prod.category || "",
+          size: prod.size || "",
+          rating: prod.rating || null
         }
       };
     }
@@ -80,7 +85,12 @@ function firePageLoaded() {
           productImageUrl: item.img || (fullProduct ? fullProduct.img : ""),
           currencyCode: "INR",
           productAddMethod: "directAdd",
-          couponCode: ""
+          couponCode: "",
+          color: fullProduct ? fullProduct.color : "",
+          warranty: fullProduct ? fullProduct.warranty : "",
+          category: fullProduct ? fullProduct.category : "",
+          size: fullProduct ? fullProduct.size : "",
+          rating: fullProduct ? fullProduct.rating : null
         };
       });
       
@@ -112,7 +122,12 @@ function firePageLoaded() {
           productImageUrl: item.img || (fullProduct ? fullProduct.img : ""),
           currencyCode: "INR",
           productAddMethod: "directAdd",
-          couponCode: ""
+          couponCode: "",
+          color: fullProduct ? fullProduct.color : "",
+          warranty: fullProduct ? fullProduct.warranty : "",
+          category: fullProduct ? fullProduct.category : "",
+          size: fullProduct ? fullProduct.size : "",
+          rating: fullProduct ? fullProduct.rating : null
         };
       });
       
@@ -263,7 +278,12 @@ function firePurchase(order) {
           productImageUrl: item.img || (fullProduct ? fullProduct.img : ""),  // ✅ Product image
           currencyCode: "INR",                               // ✅ Currency code
           productAddMethod: "directAdd",                     // ✅ Add method
-          couponCode: order.couponCode || ""                 // ✅ Coupon code
+          couponCode: order.couponCode || "",                // ✅ Coupon code
+          color: fullProduct ? fullProduct.color : "",
+          warranty: fullProduct ? fullProduct.warranty : "",
+          category: fullProduct ? fullProduct.category : "",
+          size: fullProduct ? fullProduct.size : "",
+          rating: fullProduct ? fullProduct.rating : null
         };
       })
     },
@@ -434,37 +454,37 @@ function fireProductClick(prodId, position) {
 */
 // window.digitalData = window.digitalData || [];
 const PRODUCTS = [
-  { uid:'UID-001', id:'p-101', title:'Classic White Tee', price:299, img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab', sku:'WT-001', desc:"Soft cotton t-shirt, comfortable fit. Upgrade your everyday essentials with Nobero’s premium 180 GSM T-Shirts, crafted from 100% combed cotton and treated with bio-wash and pre-shrunk technology for long-lasting comfort and durability. Designed with a classic crew neck and short sleeves, these tees are lightweight, breathable, and built for all-day wear "},
+  { uid:'UID-001', id:'p-101', title:'Classic White Tee', price:299, img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab', sku:'WT-001', desc:"Soft cotton t-shirt, comfortable fit. Upgrade your everyday essentials with Nobero’s premium 180 GSM T-Shirts, crafted from 100% combed cotton and treated with bio-wash and pre-shrunk technology for long-lasting comfort and durability. Designed with a classic crew neck and short sleeves, these tees are lightweight, breathable, and built for all-day wear ", color:'White', warranty:'6 months', category:'Apparel', size:'S-XXL', rating:4.5 },
 
-  { uid:'UID-002', id:'p-102', title:'Blue Denim Jeans', price:1499, img:'https://wrogn.com/cdn/shop/files/1_6b8140c5-6f1f-4483-9452-2c5fa2f45e09.jpg?v=1749210688', sku:'DJ-002', desc:'Slim fit denim with stretch.'},
+  { uid:'UID-002', id:'p-102', title:'Blue Denim Jeans', price:1499, img:'https://wrogn.com/cdn/shop/files/1_6b8140c5-6f1f-4483-9452-2c5fa2f45e09.jpg?v=1749210688', sku:'DJ-002', desc:'Slim fit denim with stretch.', color:'Blue', warranty:'1 year', category:'Apparel', size:'28-38', rating:4.3 },
 
-  { uid:'UID-003', id:'p-103', title:'Running Sneakers', price:3499, img:'https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/310088/14/fnd/ZAF/fmt/png', sku:'SN-003', desc:'Lightweight running shoes.'},
+  { uid:'UID-003', id:'p-103', title:'Running Sneakers', price:3499, img:'https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/310088/14/fnd/ZAF/fmt/png', sku:'SN-003', desc:'Lightweight running shoes.', color:'Grey', warranty:'1 year', category:'Footwear', size:'6-12', rating:4.6 },
 
-  { uid:'UID-004', id:'p-104', title:'Leather Wallet', price:799, img:'https://urbanforest.co.in/cdn/shop/files/A7402041.jpg?v=1733571068', sku:'WL-004', desc:'Genuine leather, multiple slots.'},
+  { uid:'UID-004', id:'p-104', title:'Leather Wallet', price:799, img:'https://urbanforest.co.in/cdn/shop/files/A7402041.jpg?v=1733571068', sku:'WL-004', desc:'Genuine leather, multiple slots.', color:'Brown', warranty:'2 years', category:'Accessories', size:'Standard', rating:4.4 },
 
-  { uid:'UID-005', id:'p-105', title:'Smartwatch', price:8999, img:'https://gourban.in/cdn/shop/files/Pulse.jpg?v=1749553994&width=2048', sku:'SW-005', desc:'Activity tracking and notifications.'},
+  { uid:'UID-005', id:'p-105', title:'Smartwatch', price:8999, img:'https://gourban.in/cdn/shop/files/Pulse.jpg?v=1749553994&width=2048', sku:'SW-005', desc:'Activity tracking and notifications.', color:'Black', warranty:'1 year', category:'Electronics', size:'Adjustable', rating:4.2 },
 
-  { uid:'UID-006', id:'p-106', title:'Black Hoodie', price:1199, img:'https://nobero.com/cdn/shop/files/believe_in_yourself_83856a14-fcf8-49fe-b285-348391d538f6.jpg?v=1760173339', sku:'BH-006', desc:'Warm fleece hoodie with pockets.'},
+  { uid:'UID-006', id:'p-106', title:'Black Hoodie', price:1199, img:'https://nobero.com/cdn/shop/files/believe_in_yourself_83856a14-fcf8-49fe-b285-348391d538f6.jpg?v=1760173339', sku:'BH-006', desc:'Warm fleece hoodie with pockets.', color:'Black', warranty:'6 months', category:'Apparel', size:'S-XXL', rating:4.5 },
 
-  { uid:'UID-007', id:'p-107', title:'Sports Cap', price:399, img:'https://invincible.in/cdn/shop/products/InvincibleUnisexQuickDryLightWeightSportsCaps-3_2048x2048.jpg?v=1656311645', sku:'CP-007', desc:'Breathable cotton sports cap.'},
+  { uid:'UID-007', id:'p-107', title:'Sports Cap', price:399, img:'https://invincible.in/cdn/shop/products/InvincibleUnisexQuickDryLightWeightSportsCaps-3_2048x2048.jpg?v=1656311645', sku:'CP-007', desc:'Breathable cotton sports cap.', color:'Navy', warranty:'6 months', category:'Accessories', size:'Free', rating:4.1 },
 
-  { uid:'UID-008', id:'p-108', title:'Wireless Earbuds', price:2499, img:'https://elver.in/cdn/shop/files/Elver_Buds_X_True_Wireless_Earbuds.png?v=1755252622', sku:'EB-008', desc:'Noise-cancelling wireless earbuds.'},
+  { uid:'UID-008', id:'p-108', title:'Wireless Earbuds', price:2499, img:'https://elver.in/cdn/shop/files/Elver_Buds_X_True_Wireless_Earbuds.png?v=1755252622', sku:'EB-008', desc:'Noise-cancelling wireless earbuds.', color:'White', warranty:'1 year', category:'Electronics', size:'Standard', rating:4.3 },
 
-  { uid:'UID-009', id:'p-109', title:'Travel Backpack', price:1999, img:'https://icon.in/cdn/shop/files/1_50b8664b-0c2b-477a-9d86-ed6fce060859.jpg?v=1756985540', sku:'BP-009', desc:'Durable backpack with spacious compartments.'},
+  { uid:'UID-009', id:'p-109', title:'Travel Backpack', price:1999, img:'https://icon.in/cdn/shop/files/1_50b8664b-0c2b-477a-9d86-ed6fce060859.jpg?v=1756985540', sku:'BP-009', desc:'Durable backpack with spacious compartments.', color:'Black', warranty:'1 year', category:'Bags', size:'30L', rating:4.6 },
 
-  { uid:'UID-010', id:'p-110', title:'Analog Wrist Watch', price:1599, img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30', sku:'AW-010', desc:'Stylish analog watch with leather strap.'},
+  { uid:'UID-010', id:'p-110', title:'Analog Wrist Watch', price:1599, img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30', sku:'AW-010', desc:'Stylish analog watch with leather strap.', color:'Brown', warranty:'2 years', category:'Accessories', size:'Standard', rating:4.2 },
 
-  { uid:'UID-011', id:'p-111', title:'Sunglasses', price:899, img:'https://images.unsplash.com/photo-1511499767150-a48a237f0083', sku:'SG-011', desc:'UV-protected polarized sunglasses.'},
+  { uid:'UID-011', id:'p-111', title:'Sunglasses', price:899, img:'https://images.unsplash.com/photo-1511499767150-a48a237f0083', sku:'SG-011', desc:'UV-protected polarized sunglasses.', color:'Black', warranty:'1 year', category:'Accessories', size:'Standard', rating:4.0 },
 
-  { uid:'UID-012', id:'p-112', title:'Casual Sneakers', price:2799, img:'https://admin.mochishoes.com/product/71-264/660/71-264-16-40-1.JPG', sku:'CS-012', desc:'Comfortable sneakers for daily use.'},
+  { uid:'UID-012', id:'p-112', title:'Casual Sneakers', price:2799, img:'https://admin.mochishoes.com/product/71-264/660/71-264-16-40-1.JPG', sku:'CS-012', desc:'Comfortable sneakers for daily use.', color:'White', warranty:'1 year', category:'Footwear', size:'6-12', rating:4.4 },
 
-  { uid:'UID-013', id:'p-113', title:'Formal Shirt', price:999, img:'https://images.meesho.com/images/products/398396769/lorj9_512.webp?width=512', sku:'FS-013', desc:'Slim-fit formal shirt for office wear.'},
+  { uid:'UID-013', id:'p-113', title:'Formal Shirt', price:999, img:'https://images.meesho.com/images/products/398396769/lorj9_512.webp?width=512', sku:'FS-013', desc:'Slim-fit formal shirt for office wear.', color:'Blue', warranty:'6 months', category:'Apparel', size:'S-XXL', rating:4.3 },
 
-  { uid:'UID-014', id:'p-114', title:'Laptop Sleeve', price:599, img:'https://www.thepostbox.in/cdn/shop/files/04_12434f64-cf19-4041-b119-f50c2bf20c8f_1800x1800.jpg?v=1736317493', sku:'LS-014', desc:'Protective sleeve for laptops up to 15 inches.'},
+  { uid:'UID-014', id:'p-114', title:'Laptop Sleeve', price:599, img:'https://www.thepostbox.in/cdn/shop/files/04_12434f64-cf19-4041-b119-f50c2bf20c8f_1800x1800.jpg?v=1736317493', sku:'LS-014', desc:'Protective sleeve for laptops up to 15 inches.', color:'Grey', warranty:'1 year', category:'Accessories', size:'15 inch', rating:4.2 },
 
-  { uid:'UID-015', id:'p-115', title:'Fitness Band', price:1999, img:'https://5.imimg.com/data5/SELLER/Default/2021/1/YP/LY/FV/78305368/m4-fitness-band.png', sku:'FB-015', desc:'Tracks heart rate, steps, and sleep.'},
+  { uid:'UID-015', id:'p-115', title:'Fitness Band', price:1999, img:'https://5.imimg.com/data5/SELLER/Default/2021/1/YP/LY/FV/78305368/m4-fitness-band.png', sku:'FB-015', desc:'Tracks heart rate, steps, and sleep.', color:'Black', warranty:'1 year', category:'Electronics', size:'Adjustable', rating:4.3 },
 
-  { uid:'UID-016', id:'p-116', title:'Perfume Spray', price:1299, img:'https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_600/NI_CATALOG/IMAGES/CIW/2024/7/6/326a22c5-9bc6-4b4d-a5f4-67e445060f93_perfume_PZKFD3J0K2_MN.png', sku:'PF-016', desc:'Long-lasting refreshing fragrance.'}
+  { uid:'UID-016', id:'p-116', title:'Perfume Spray', price:1299, img:'https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_600/NI_CATALOG/IMAGES/CIW/2024/7/6/326a22c5-9bc6-4b4d-a5f4-67e445060f93_perfume_PZKFD3J0K2_MN.png', sku:'PF-016', desc:'Long-lasting refreshing fragrance.', color:'Assorted', warranty:'6 months', category:'Personal Care', size:'100ml', rating:4.1 }
 ];
 
 
